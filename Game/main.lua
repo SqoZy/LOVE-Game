@@ -1,22 +1,18 @@
 local rectangle = require("rectangle")
 local rectangle2 = require("rectangle2")
 local mouseinput = require("mouseinput")
+local screenmanager = require("Screens.screenmanager")
 local isHovering = false
 
 
 function love.load()
-    rectangle.load()
-    rectangle2.load()
+    screenmanager.load()
 end
 
 function love.update(dt)
-    isHovering = mouseinput.checkMouseHover(rectangle) or mouseinput.checkMouseHover(rectangle2)
-    rectangle.update(dt)
-
-    mouseinput.dragObject(rectangle2)
+    screenmanager.update(dt)
 end
 
 function love.draw()
-    rectangle.draw(isHovering)
-    love.graphics.rectangle("fill", rectangle2.x, rectangle2.y, rectangle2.width, rectangle2.height)
+    screenmanager.draw()
 end

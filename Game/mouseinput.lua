@@ -14,11 +14,14 @@ function mouseinput.dragObject(object)
     if love.mouse.isDown(1) then
         if not dragging and mouseinput.checkMouseHover(object) then
             dragging = true
+            local x, y = love.mouse.getPosition()
+            offsetX = x - object.x
+            offsetY = y - object.y
         end
         if dragging then
             local x, y = love.mouse.getPosition()
-            object.x = x - object.width / 2
-            object.y = y - object.height / 2
+            object.x = x - offsetX
+            object.y = y - offsetY
         end
     else
         dragging = false
