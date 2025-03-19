@@ -1,15 +1,15 @@
 local homescreen = {}
 local screen = "homescreen"
 
-function endscreen.load()
+function homescreen.load()
 
 end
 
-function endscreen.update(dt)
+function homescreen.update(dt)
 
 end
 
-function endscreen.draw()
+function homescreen.draw()
     
 end
 

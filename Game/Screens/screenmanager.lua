@@ -1,8 +1,8 @@
 local screenmanager = {}
 
 local startScreen, homeScreen, gameScreen, endScreen
-local screen = "gamescreen"
-local screenModules = {}
+local screen
+local screenModules = {} -- Table to store all the screens for versatility
 
 function screenmanager.load()
     startScreen = require("Screens.startscreen")
@@ -10,12 +10,13 @@ function screenmanager.load()
     gameScreen = require("Screens.gamescreen")
     endScreen = require("Screens.endscreen")
 
+    -- Add all the screens to the table
     screenModules["startscreen"] = startScreen
     screenModules["homescreen"] = homeScreen
     screenModules["gamescreen"] = gameScreen
     screenModules["endscreen"] = endScreen
 
-    initiateScreen("endscreen")
+    initiateScreen("gamescreen")
 end
 
 function screenmanager.update(dt)
@@ -32,9 +33,7 @@ function screenmanager.draw()
         return
     end
     screenModules[screen].draw()
-    
 end
-
 
 function initiateScreen(screenName)
     screen = screenName
