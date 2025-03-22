@@ -11,6 +11,7 @@ function InteractObject:new(x, y, radius)
     obj.growDuration = 2 
     obj.isSpawning = false
     obj.isDestroyed = false 
+    obj.dragging = false
     return obj
 end
 

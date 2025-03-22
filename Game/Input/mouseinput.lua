@@ -1,5 +1,7 @@
 local mouseinput = {}
 local dragging = false
+local swipeStartX, swipeStartY = nil, nil
+local minimumSwipe = 10
 
 function mouseinput.checkMouseHover(object)
     local x, y = love.mouse.getPosition()
@@ -18,19 +20,51 @@ end
 
 function mouseinput.dragObject(object)
     if love.mouse.isDown(1) then
-        if not dragging and mouseinput.checkMouseHover(object) then
-            dragging = true
-            local x, y = love.mouse.getPosition()
+        local x, y = love.mouse.getPosition()
+
+        if not object.dragging and mouseinput.checkMouseHover(object) then
+            object.dragging = true -- Set dragging for this specific object
             offsetX = x - object.x
             offsetY = y - object.y
+            swipeStartX = x
+            swipeStartY = y
         end
-        if dragging then
-            local x, y = love.mouse.getPosition()
+
+        if object.dragging then
             object.x = x - offsetX
             object.y = y - offsetY
+
+            -- Detect swipe direction during dragging
+            local deltaX = x - swipeStartX
+            local deltaY = y - swipeStartY
+
+            if math.abs(deltaX) > minimumSwipe or math.abs(deltaY) > minimumSwipe then
+                local direction = nil
+                if math.abs(deltaX) > math.abs(deltaY) then
+                    if deltaX > 0 then
+                        direction = "right"
+                    else
+                        direction = "left"
+                    end
+                else
+                    if deltaY > 0 then
+                        direction = "down"
+                    else
+                        direction = "up"
+                    end
+                end
+
+                if direction then
+                    object:onSwipe(direction) 
+                    swipeStartX = x 
+                    swipeStartY = y
+                end
+            end
         end
     else
-        dragging = false
+        object.dragging = false -- Reset dragging for this specific object
+        swipeStartX = nil
+        swipeStartY = nil
     end
 end
 

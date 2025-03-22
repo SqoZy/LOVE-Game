@@ -1,4 +1,5 @@
 local ClickObject = require("Objects.InteractObjects.ClickObjects.clickobject")
+local SwipeObject = require("Objects.InteractObjects.SwipeObjects.swipeobject")
 local objectspawner = {}
 local spawnTimer = 0 
 local spawnInterval = 3
@@ -12,13 +13,25 @@ function objectspawner.clickObjectSpawn(x, y, radius, growDuration)
     table.insert(objectspawner.objects, newObject) -- Add the new object to the list
 end
 
+function objectspawner.swipeObjectSpawn(x, y, radius, growDuration)
+    local newObject = SwipeObject:new(x, y, radius)
+    newObject:_spawn(growDuration) -- Start the grow timer
+    table.insert(objectspawner.objects, newObject) -- Add the new object to the list
+end
+
 -- Function to spawn a ClickObject at a random position
 function objectspawner.spawnRandom(radius, growDuration)
     local screenWidth, screenHeight = love.graphics.getDimensions()
     local maxY = screenHeight * 0.75
     local x = math.random(radius, screenWidth - radius)
-    local y = math.random(radius, maxY - radius) 
-    objectspawner.clickObjectSpawn(x, y, radius, growDuration)
+    local y = math.random(radius, maxY - radius)
+
+    if math.random(1, 2) == 1 then
+        objectspawner.clickObjectSpawn(x, y, radius, growDuration)
+    else
+        print("Spawning object at:", x, y, "with radius:", radius)
+        objectspawner.swipeObjectSpawn(x, y, radius, growDuration)
+    end
 end
 
 -- Function to generate random properties for a ClickObject
