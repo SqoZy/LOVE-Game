@@ -1,6 +1,7 @@
 local rectangle = {}
 local width, height = 200, 100
-local spawnx, spawny = 100, 100
+local screenWidth, screenHeight = love.graphics.getWidth(), love.graphics.getHeight()
+local spawnx, spawny = (screenWidth - width) / 2, (screenHeight - height) / 2
 
 function rectangle.load()
     rectangle.x = spawnx
