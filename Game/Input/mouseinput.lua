@@ -3,10 +3,16 @@ local dragging = false
 
 function mouseinput.checkMouseHover(object)
     local x, y = love.mouse.getPosition()
-    if x > object.x and x < object.x + object.width and y > object.y and y < object.y + object.height then
-        return true
+    if object.radius then
+        -- Handle circular objects
+        local dx = x - object.x
+        local dy = y - object.y
+        return (dx * dx + dy * dy) <= (object.radius * object.radius)
+    elseif object.width and object.height then
+        -- Handle rectangular objects
+        return x > object.x and x < object.x + object.width and y > object.y and y < object.y + object.height
     else
-        return false
+        error("Object must have either 'radius' or 'width' and 'height'")
     end
 end
 
@@ -25,6 +31,14 @@ function mouseinput.dragObject(object)
         end
     else
         dragging = false
+    end
+end
+
+function mouseinput.destroyClickObject(object)
+    if love.mouse.isDown(1) then
+        if mouseinput.checkMouseHover(object) then
+            object:_destroy()
+        end
     end
 end
 
