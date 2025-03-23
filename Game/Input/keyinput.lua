@@ -19,9 +19,7 @@ function keyinput.keyReleased(key, screen)
 end
 
 function GameScreenInput(key, screen)
-    if key == "escape" then
-        love.event.quit()
-    end
+
 end
 
 function GeneralScreenInput(key, screen)
@@ -34,6 +32,9 @@ function GeneralScreenInput(key, screen)
             local windowHeight = screenHeight * 0.9 -- 90% of the screen height
             love.window.setMode(windowWidth, windowHeight, { fullscreen = false, resizable = false })
         end
+    end
+    if key == "escape" then
+        love.event.quit()
     end
 end
 

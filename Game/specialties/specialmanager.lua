@@ -1,19 +1,45 @@
 local specialmanager = {}
 
-local selectedSpecial = nil
-local selectedSpecialIndex = nil
- specialmanager.specials = {}
+specialmanager.specials = {} -- Table to store all registered specialties
+specialmanager.ultimates = {} -- Table to store all registered ultimates
 
-local activename, activedamage, activecooldown, activespeed = nil, nil, nil, nil
-local activeultname, activeultdamage, activeultcooldown, activeultspeed = nil, nil, nil, nil
+local activeSpecial = nil
+local activeUltimate = nil
 
 function specialmanager.load()
-    specialmanager.fireballimage = love.graphics.newImage("assets/specialties/NOR_fireball.png")
-    specialmanager.iceballimage = love.graphics.newImage("assets/specialties/NOR_iceball.png")
-    specialmanager.poisonballimage = love.graphics.newImage("assets/specialties/NOR_poisonball.png")
-    specialmanager.slimeballimage = love.graphics.newImage("assets/specialties/NOR_slimeball.png")
-    specialmanager.acidrainimage = love.graphics.newImage("assets/specialties/ULT_acidrain.png")
-    specialmanager.meteorrainimage = love.graphics.newImage("assets/specialties/ULT_meteorrain.png")
+    -- Load all specialties and ultimates
+    require("specialties.slimeball")
+    require("specialties.fireball")
+    require("specialties.iceball")
+    require("specialties.poisonball")
+    require("specialties.meteorrain")
+    require("specialties.acidrain")
+end
+
+function specialmanager.registerSpecial(special)
+    table.insert(specialmanager.specials, special)
+end
+
+function specialmanager.registerUltimate(ultimate)
+    table.insert(specialmanager.ultimates, ultimate)
+end
+
+function specialmanager.setActiveSpecial(name)
+    for _, special in ipairs(specialmanager.specials) do
+        if special.name == name then
+            activeSpecial = special
+            break
+        end
+    end
+end
+
+function specialmanager.setActiveUltimate(name)
+    for _, ultimate in ipairs(specialmanager.ultimates) do
+        if ultimate.name == name then
+            activeUltimate = ultimate
+            break
+        end
+    end
 end
 
 function specialmanager.update(dt)
@@ -28,40 +54,14 @@ function specialmanager.draw()
     local ultScale = 0.1 -- Scale for the ultimate image
 
     -- Draw the active special
-    if activename == "Fireball" then
-        love.graphics.draw(specialmanager.fireballimage, specialX, specialY, 0, specialScale, specialScale)
-    elseif activename == "Iceball" then
-        love.graphics.draw(specialmanager.iceballimage, specialX, specialY, 0, specialScale, specialScale)
-    elseif activename == "Poisonball" then
-        love.graphics.draw(specialmanager.poisonballimage, specialX, specialY, 0, specialScale, specialScale)
-    elseif activename == "Slimeball" then
-        love.graphics.draw(specialmanager.slimeballimage, specialX, specialY, 0, specialScale, specialScale)
+    if activeSpecial and activeSpecial.image then
+        love.graphics.draw(activeSpecial.image, specialX, specialY, 0, specialScale, specialScale)
     end
 
     -- Draw the active ultimate
-    if activeultname == "Acidrain" then
-        love.graphics.draw(specialmanager.acidrainimage, ultX, ultY, 0, ultScale, ultScale)
-    elseif activeultname == "Meteorrain" then
-        love.graphics.draw(specialmanager.meteorrainimage, ultX, ultY, 0, ultScale, ultScale)
+    if activeUltimate and activeUltimate.image then
+        love.graphics.draw(activeUltimate.image, ultX, ultY, 0, ultScale, ultScale)
     end
-end
-
-function currentSpecial()
-    return activename, activedamage, activecooldown, activespeed
-end
-
-function specialmanager.reqvarspecial(name, damage, cooldown, speed)
-    activename = name
-    activedamage = damage
-    activecooldown = cooldown
-    activespeed = speed
-end
-
-function specialmanager.reqvarultimate(name, damage, cooldown, speed)
-    activeultname = name
-    activeultdamage = damage
-    activeultcooldown = cooldown
-    activeultspeed = speed
 end
 
 return specialmanager

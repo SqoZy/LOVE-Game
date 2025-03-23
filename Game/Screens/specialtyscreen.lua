@@ -1,39 +1,44 @@
 local specialtyscreen = {}
 local specialmanager = require("specialties.specialmanager")
+local keyinput = require("Input.keyinput")
 
+local screen = "specialtyscreen"
 local selectedSpecial = nil
 local selectedUltimate = nil
 
 function specialtyscreen.load()
     local screenWidth, screenHeight = love.graphics.getDimensions()
+    specialmanager.load()
 
-    -- Load images for specialties
-    specialtyscreen.specialtyImages = {
-        Fireball = love.graphics.newImage("assets/specialties/NOR_fireball.png"),
-        Iceball = love.graphics.newImage("assets/specialties/NOR_iceball.png"),
-        Poisonball = love.graphics.newImage("assets/specialties/NOR_poisonball.png"),
-        Slimeball = love.graphics.newImage("assets/specialties/NOR_slimeball.png")
-    }
+    -- Load specialties and ultimates dynamically from specialmanager
+    specialtyscreen.specialties = {}
+    specialtyscreen.ultimates = {}
 
-    -- Load images for ultimates
-    specialtyscreen.ultimateImages = {
-        Acidrain = love.graphics.newImage("assets/specialties/ULT_acidrain.png"),
-        Meteorrain = love.graphics.newImage("assets/specialties/ULT_meteorrain.png")
-    }
+    -- Dynamically position specialties
+    local numSpecialties = #specialmanager.specials
+    for i, special in ipairs(specialmanager.specials) do
+        table.insert(specialtyscreen.specialties, {
+            name = special.name,
+            image = special.image,
+            x = (i - 1) * (screenWidth / numSpecialties) + (screenWidth / numSpecialties) / 2 - 50,
+            y = screenHeight / 3,
+            width = 100,
+            height = 100
+        })
+    end
 
-    -- Define specialties
-    specialtyscreen.specialties = {
-        {name = "Fireball", x = screenWidth / 4 - 50, y = screenHeight / 3, width = 100, height = 100},
-        {name = "Iceball", x = screenWidth / 2 - 50, y = screenHeight / 3, width = 100, height = 100},
-        {name = "Poisonball", x = 3 * screenWidth / 4 - 50, y = screenHeight / 3, width = 100, height = 100},
-        {name = "Slimeball", x = screenWidth - 150, y = screenHeight / 3, width = 100, height = 100}
-    }
-
-    -- Define ultimates
-    specialtyscreen.ultimates = {
-        {name = "Acidrain", x = screenWidth / 3 - 50, y = 2 * screenHeight / 3, width = 100, height = 100},
-        {name = "Meteorrain", x = 2 * screenWidth / 3 - 50, y = 2 * screenHeight / 3, width = 100, height = 100}
-    }
+    -- Dynamically position ultimates
+    local numUltimates = #specialmanager.ultimates
+    for i, ultimate in ipairs(specialmanager.ultimates) do
+        table.insert(specialtyscreen.ultimates, {
+            name = ultimate.name,
+            image = ultimate.image,
+            x = (i - 1) * (screenWidth / numUltimates) + (screenWidth / numUltimates) / 2 - 50,
+            y = 2 * screenHeight / 3,
+            width = 100,
+            height = 100
+        })
+    end
 end
 
 function specialtyscreen.update()
@@ -70,10 +75,9 @@ function specialtyscreen.draw()
         love.graphics.print(specialty.name, specialty.x + 10, specialty.y + specialty.height + 10)
 
         -- Draw the specialty image
-        local image = specialtyscreen.specialtyImages[specialty.name]
-        if image then
+        if specialty.image then
             love.graphics.setColor(1, 1, 1) -- Reset color to white
-            love.graphics.draw(image, specialty.x, specialty.y, 0, specialty.width / image:getWidth(), specialty.height / image:getHeight())
+            love.graphics.draw(specialty.image, specialty.x, specialty.y, 0, specialty.width / specialty.image:getWidth(), specialty.height / specialty.image:getHeight())
         end
     end
 
@@ -88,21 +92,17 @@ function specialtyscreen.draw()
         love.graphics.print(ultimate.name, ultimate.x + 10, ultimate.y + ultimate.height + 10)
 
         -- Draw the ultimate image
-        local image = specialtyscreen.ultimateImages[ultimate.name]
-        if image then
+        if ultimate.image then
             love.graphics.setColor(1, 1, 1) -- Reset color to white
-            love.graphics.draw(image, ultimate.x, ultimate.y, 0, ultimate.width / image:getWidth(), ultimate.height / image:getHeight())
+            love.graphics.draw(ultimate.image, ultimate.x, ultimate.y, 0, ultimate.width / ultimate.image:getWidth(), ultimate.height / ultimate.image:getHeight())
         end
-
-        -- Draw the ultimate name below the image
-        love.graphics.setColor(1, 1, 1) -- Reset color to white
     end
 end
 
 function specialtyscreen.confirmSelection()
     if selectedSpecial and selectedUltimate then
-        specialmanager.reqvarspecial(selectedSpecial, 10, 1, 100) -- Example values
-        specialmanager.reqvarultimate(selectedUltimate, 20, 5, 50) -- Example values
+        specialmanager.setActiveSpecial(selectedSpecial)
+        specialmanager.setActiveUltimate(selectedUltimate)
         initiateScreen("gamescreen") -- Go to the game screen
     end
 end
@@ -111,6 +111,14 @@ function love.keypressed(key)
     if key == "return" then
         specialtyscreen.confirmSelection()
     end
+end
+
+function love.keypressed(key, scancode, isrepeat)
+    keyinput.keyPressed(key, screen)
+end
+
+function love.keyreleased(key, scancode)
+    keyinput.keyReleased(key, screen)
 end
 
 return specialtyscreen
