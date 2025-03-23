@@ -3,7 +3,6 @@ local screenWidth, screenHeight = love.graphics.getDimensions()
 anim8 = require("Libraries.anim8")
 
 function player.load()
-    player.image = love.graphics.newImage("assets/player/wizard.png") 
     player.spritesheet = love.graphics.newImage("assets/player/wizard_spritesheet.png")
     player.grid = anim8.newGrid(109, 128, player.spritesheet:getWidth(), player.spritesheet:getHeight())
 

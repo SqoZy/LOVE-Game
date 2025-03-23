@@ -2,8 +2,8 @@ local gamescreen = {}
 local screen = "gamescreen"
 local mouseinput = require("Input.mouseinput")
 local keyinput = require("Input.keyinput")
-local objectspawner = require("Objects.Spawners.objectspawner")
-local enemySpawner = require("Objects.Spawners.enemyspawner")
+local objectspawner = require("Spawners.objectspawner")
+local enemySpawner = require("Spawners.enemyspawner")
 local player = require("Objects.PassiveObjects.PlayerObject.player")
 
 function gamescreen.load()

@@ -5,7 +5,6 @@ anim8 = require("Libraries.anim8")
 
 function SlimeEnemy:new(x, y)
     local obj = enemy.new(self, x, y)
-    obj.image = love.graphics.newImage("assets/player/wizard.png")
     obj.spritesheet = love.graphics.newImage("assets/enemies/Runleft.png")
     obj.grid = anim8.newGrid(150, 150, obj.spritesheet:getWidth(), obj.spritesheet:getHeight())
 
