@@ -5,9 +5,14 @@ local keyinput = require("Input.keyinput")
 local objectspawner = require("Spawners.objectspawner")
 local enemySpawner = require("Spawners.enemyspawner")
 local player = require("Objects.PassiveObjects.PlayerObject.player")
+local specialmanager = require("Specialties.specialmanager")
 
 function gamescreen.load()
-    player.load() 
+    player.load()
+    specialmanager.load()
+
+    specialmanager.reqvarspecial("Fireball", 10, 1, 100)
+    specialmanager.reqvarultimate("Acidrain", 20, 5, 50)
 end
 
 function gamescreen.update(dt)
@@ -19,7 +24,8 @@ end
 function gamescreen.draw()
     objectspawner.draw()
     enemySpawner.draw()
-    player.draw() 
+    player.draw()
+    specialmanager.draw()
 end
 
 function love.keypressed(key, scancode, isrepeat)

@@ -1,7 +1,7 @@
 local screenmanager = require("Screens.screenmanager")
 
 function love.load()
-    --love.window.setFullscreen(true)
+    love.window.setFullscreen(true)
     screenmanager.load()
 end
 

@@ -9,14 +9,16 @@ function screenmanager.load()
     homeScreen = require("Screens.homescreen")
     gameScreen = require("Screens.gamescreen")
     endScreen = require("Screens.endscreen")
+    specialtyscreen = require("Screens.specialtyscreen")
 
     -- Add all the screens to the table
     screenModules["startscreen"] = startScreen
     screenModules["homescreen"] = homeScreen
     screenModules["gamescreen"] = gameScreen
     screenModules["endscreen"] = endScreen
+    screenModules["specialtyscreen"] = specialtyscreen
 
-    initiateScreen("gamescreen")
+    initiateScreen("specialtyscreen")
 end
 
 function screenmanager.update(dt)
