@@ -14,6 +14,14 @@ function specialmanager.load()
     require("specialties.poisonball")
     require("specialties.meteorrain")
     require("specialties.acidrain")
+
+    -- Debug: Print loaded specialties and ultimates
+    for _, special in ipairs(specialmanager.specials) do
+        print("Loaded Special:", special.name, special.image)
+    end
+    for _, ultimate in ipairs(specialmanager.ultimates) do
+        print("Loaded Ultimate:", ultimate.name, ultimate.image)
+    end
 end
 
 function specialmanager.registerSpecial(special)
@@ -62,6 +70,14 @@ function specialmanager.draw()
     if activeUltimate and activeUltimate.image then
         love.graphics.draw(activeUltimate.image, ultX, ultY, 0, ultScale, ultScale)
     end
+end
+
+function specialmanager.getActiveSpecial()
+    return activeSpecial
+end
+
+function specialmanager.getActiveUltimate()
+    return activeUltimate
 end
 
 return specialmanager

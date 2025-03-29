@@ -9,10 +9,7 @@ local specialmanager = require("Specialties.specialmanager")
 
 function gamescreen.load()
     player.load()
-    specialmanager.load()
-
-    specialmanager.reqvarspecial("Fireball", 10, 1, 100)
-    specialmanager.reqvarultimate("Acidrain", 20, 5, 50)
+    specialmanager.setActiveSpecial("fireball")
 end
 
 function gamescreen.update(dt)

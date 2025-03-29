@@ -8,7 +8,6 @@ local selectedUltimate = nil
 
 function specialtyscreen.load()
     local screenWidth, screenHeight = love.graphics.getDimensions()
-    specialmanager.load()
 
     -- Load specialties and ultimates dynamically from specialmanager
     specialtyscreen.specialties = {}
