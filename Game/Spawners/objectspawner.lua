@@ -29,7 +29,6 @@ function objectspawner.spawnRandom(radius, growDuration)
     if math.random(1, 2) == 1 then
         objectspawner.clickObjectSpawn(x, y, radius, growDuration)
     else
-        print("Spawning object at:", x, y, "with radius:", radius)
         objectspawner.swipeObjectSpawn(x, y, radius, growDuration)
     end
 end

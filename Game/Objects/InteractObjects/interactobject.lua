@@ -41,7 +41,6 @@ function InteractObject:_spawn(growDuration)
 end
 
 function InteractObject:_destroy()
-    print("InteractObject destroyed!")
     self.isDestroyed = true
 end
 

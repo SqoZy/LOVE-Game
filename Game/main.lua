@@ -1,7 +1,11 @@
 local screenmanager = require("Screens.screenmanager")
+local specialmanager = require("specialties.specialmanager")
 
 function love.load()
-    love.window.setFullscreen(true)
+    -- Initialize the specialmanager after Love2D is ready
+    specialmanager.load()
+
+    -- Initialize the screenmanager
     screenmanager.load()
 end
 

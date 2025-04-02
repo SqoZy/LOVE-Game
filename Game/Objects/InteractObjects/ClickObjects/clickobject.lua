@@ -24,7 +24,6 @@ end
 
 function ClickObject:_destroy()
     InteractObject._destroy(self)
-    print("ClickObject destroyed!")
 end
 
 return ClickObject

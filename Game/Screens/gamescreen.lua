@@ -5,11 +5,10 @@ local keyinput = require("Input.keyinput")
 local objectspawner = require("Spawners.objectspawner")
 local enemySpawner = require("Spawners.enemyspawner")
 local player = require("Objects.PassiveObjects.PlayerObject.player")
-local specialmanager = require("Specialties.specialmanager")
+local screenmanager = require("Screens.screenmanager") -- Require the screenmanager
 
 function gamescreen.load()
     player.load()
-    specialmanager.setActiveSpecial("fireball")
 end
 
 function gamescreen.update(dt)
@@ -22,7 +21,9 @@ function gamescreen.draw()
     objectspawner.draw()
     enemySpawner.draw()
     player.draw()
-    specialmanager.draw()
+
+    -- Draw the selected special via the screenmanager
+    screenmanager.drawSpecial()
 end
 
 function love.keypressed(key, scancode, isrepeat)

@@ -32,7 +32,6 @@ end
 
 function SwipeObject:_destroy()
     InteractObject._destroy(self)
-    print("SwipeObject destroyed!")
 end
 
 return SwipeObject
