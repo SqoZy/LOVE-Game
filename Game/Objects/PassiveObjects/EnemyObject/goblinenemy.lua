@@ -1,9 +1,9 @@
 local enemy = require("Objects.PassiveObjects.EnemyObject.enemy")
-local SlimeEnemy = setmetatable({}, { __index = enemy })
-SlimeEnemy.__index = SlimeEnemy
+local GolbinEnemy = setmetatable({}, { __index = enemy })
+GolbinEnemy.__index = GolbinEnemy
 anim8 = require("Libraries.anim8")
 
-function SlimeEnemy:new(x, y)
+function GolbinEnemy:new(x, y)
     local obj = enemy.new(self, x, y)
     obj.spritesheet = love.graphics.newImage("assets/enemies/Runleft.png")
     obj.grid = anim8.newGrid(150, 150, obj.spritesheet:getWidth(), obj.spritesheet:getHeight())
@@ -15,14 +15,14 @@ function SlimeEnemy:new(x, y)
     return obj
 end
 
-function SlimeEnemy:update(dt)
+function GolbinEnemy:update(dt)
     enemy.update(self, dt)
     self.animation.run:update(dt)
 end
 
-function SlimeEnemy:draw()
+function GolbinEnemy:draw()
     love.graphics.setColor(1, 1, 1)
     self.animation.run:draw(self.spritesheet, self.x, self.y)
 end
 
-return SlimeEnemy 
+return GolbinEnemy 

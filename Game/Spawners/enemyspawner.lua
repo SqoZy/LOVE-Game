@@ -1,12 +1,12 @@
-local SlimeEnemy = require("Objects.PassiveObjects.EnemyObject.slimeenemy")
+local GolbinEnemy = require("Objects.PassiveObjects.EnemyObject.goblinenemy")
 local enemySpawner = {}
 local spawnTimer = 0
 local spawnInterval = 3
 
 enemySpawner.enemies = {} -- Table to store all spawned enemies
 
-function enemySpawner.spawnSlimeEnemy(x, y)
-    local newEnemy = SlimeEnemy:new(x, y)
+function enemySpawner.spawnGolbinEnemy(x, y)
+    local newEnemy = GolbinEnemy:new(x, y)
     table.insert(enemySpawner.enemies, newEnemy)
 end
 
@@ -14,7 +14,8 @@ function enemySpawner.spawn()
     local screenWidth, screenHeight = love.graphics.getDimensions()
     local x = screenWidth + 30
     local y = screenHeight - 150
-    enemySpawner.spawnSlimeEnemy(x, y)
+    enemySpawner.spawnGolbinEnemy(x, y)
+    
 end
 
 function enemySpawner.update(dt)

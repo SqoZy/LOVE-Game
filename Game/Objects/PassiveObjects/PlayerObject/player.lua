@@ -1,6 +1,7 @@
 local player = {}
 local screenWidth, screenHeight = love.graphics.getDimensions()
-anim8 = require("Libraries.anim8")
+local anim8 = require("Libraries.anim8")
+local enemySpawner = require("Spawners.enemyspawner")
 
 function player.load()
     player.spritesheet = love.graphics.newImage("assets/player/wizard_spritesheet.png")
@@ -25,6 +26,26 @@ end
 function player.draw()
     love.graphics.setColor(1, 1, 1)
     player.animation.idle:draw(player.spritesheet, player.x, player.y)
+end
+
+function attack()
+    local closestEnemy = nil
+    local closestDist = math.huge
+    local pxcenter, pycenter = player.x + player.width / 2, player.y + player.height / 2
+
+    for _, enemy in ipairs(enemySpawner.enemies) do
+        local ex, ey = enemy.x, enemy.y
+        local dist = math.sqrt((pxcenter - ex)^2 + (pycenter - ey)^2)
+        if dist < closestDist then
+            closestDist = dist
+            closestEnemy = enemy
+        end
+    end
+
+    if closestEnemy then
+        closestEnemy:takeDamage(10) -- Or use your special's damage value
+        print("Attacked enemy at:", closestEnemy.x, closestEnemy.y)
+    end
 end
 
 return player
