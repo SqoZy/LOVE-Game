@@ -1,5 +1,5 @@
 local screenmanager = require("Screens.screenmanager")
-local specialmanager = require("specialties.specialmanager")
+local specialmanager = require("Specialties.specialmanager")
 
 function love.load()
     -- Initialize the specialmanager after Love2D is ready

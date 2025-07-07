@@ -4,7 +4,7 @@ local startScreen, homeScreen, gameScreen, endScreen, specialtyscreen
 local screen
 local screenModules = {} -- Table to store all the screens for versatility
 
-local specialmanager = require("specialties.specialmanager") -- Require the specialmanager
+local specialmanager = require("Specialties.specialmanager") -- Require the specialmanager
 
 function screenmanager.load()
     -- Load specialties and ultimates

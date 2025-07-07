@@ -1,4 +1,4 @@
-local specialmanager = require("specialties.specialmanager")
+local specialmanager = require("Specialties.specialmanager")
 
 specialmanager.registerSpecial({
     name = "poisonball",

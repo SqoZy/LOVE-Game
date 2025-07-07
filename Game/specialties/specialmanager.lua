@@ -9,12 +9,12 @@ local selectedSpecial = 1
 local selectedUltimate
 
 function specialmanager.load()
-    require("specialties.slimeball")
-    require("specialties.fireball")
-    require("specialties.iceball")
-    require("specialties.poisonball")
-    require("specialties.meteorrain")
-    require("specialties.acidrain")
+    require("Specialties.slimeball")
+    require("Specialties.fireball")
+    require("Specialties.iceball")
+    require("Specialties.poisonball")
+    require("Specialties.meteorrain")
+    require("Specialties.acidrain")
 end
 
 function specialmanager.registerSpecial(special)

@@ -1,5 +1,5 @@
 local specialtyscreen = {}
-local specialmanager = require("specialties.specialmanager")
+local specialmanager = require("Specialties.specialmanager")
 local keyinput = require("Input.keyinput")
 local mouseinput = require("Input.mouseinput")
 

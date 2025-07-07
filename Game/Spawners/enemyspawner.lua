@@ -1,4 +1,4 @@
-local GolbinEnemy = require("Objects.PassiveObjects.EnemyObject.goblinenemy")
+local GolbinEnemy = require("Objects.PassiveObjects.EnemyObject.trashenemy")
 local enemySpawner = {}
 local spawnTimer = 0
 local spawnInterval = 3
