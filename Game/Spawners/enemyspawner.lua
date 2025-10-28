@@ -12,8 +12,8 @@ end
 
 function enemySpawner.spawn()
     local screenWidth, screenHeight = love.graphics.getDimensions()
-    local x = screenWidth + 30
-    local y = screenHeight - 150
+    local x = screenWidth * 1.05
+    local y = screenHeight * 0.75
     enemySpawner.spawnGolbinEnemy(x, y)
     
 end

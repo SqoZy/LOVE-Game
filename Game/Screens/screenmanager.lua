@@ -2,28 +2,24 @@ local screenmanager = {}
 
 local startScreen, homeScreen, gameScreen, endScreen, specialtyscreen
 local screen
-local screenModules = {} -- Table to store all the screens for versatility
+local screenModules = {}
 
-local specialmanager = require("Specialties.specialmanager") -- Require the specialmanager
+local specialmanager = require("Specialties.specialmanager")
 
 function screenmanager.load()
-    -- Load specialties and ultimates
-
-    -- Load screens
     startScreen = require("Screens.startscreen")
     homeScreen = require("Screens.homescreen")
     gameScreen = require("Screens.gamescreen")
     endScreen = require("Screens.endscreen")
     specialtyscreen = require("Screens.specialtyscreen")
 
-    -- Add all the screens to the table
     screenModules["startscreen"] = startScreen
     screenModules["homescreen"] = homeScreen
     screenModules["gamescreen"] = gameScreen
     screenModules["endscreen"] = endScreen
     screenModules["specialtyscreen"] = specialtyscreen
 
-    initiateScreen("specialtyscreen") -- Start with the home screen
+    initiateScreen("specialtyscreen")
 end
 
 function screenmanager.update(dt)

@@ -13,8 +13,8 @@ function objectspawner.clickObjectSpawn(x, y, radius, growDuration)
     table.insert(objectspawner.objects, newObject) -- Add the new object to the list
 end
 
-function objectspawner.swipeObjectSpawn(x, y, radius, growDuration)
-    local newObject = SwipeObject:new(x, y, radius)
+function objectspawner.swipeObjectSpawn(x, y, radius, growDuration, direction)
+    local newObject = SwipeObject:initialize(x, y, radius, direction)
     newObject:_spawn(growDuration) -- Start the grow timer
     table.insert(objectspawner.objects, newObject) -- Add the new object to the list
 end
@@ -25,11 +25,16 @@ function objectspawner.spawnRandom(radius, growDuration)
     local maxY = screenHeight * 0.75
     local x = math.random(radius, screenWidth - radius)
     local y = math.random(radius, maxY - radius)
+    local direction = math.random(1, 4) == 1 and "up" 
+    or math.random(1, 4) == 2 and "down" 
+    or math.random(1, 4) == 3 and "left" 
+    or "right"
 
-    if math.random(1, 2) == 1 then
+    if math.random(1, 2) == 3 then
         objectspawner.clickObjectSpawn(x, y, radius, growDuration)
     else
-        objectspawner.swipeObjectSpawn(x, y, radius, growDuration)
+        objectspawner.swipeObjectSpawn(x, y, radius, growDuration, direction)
+        print("Spawned SwipeObject with direction: " .. direction)
     end
 end
 
