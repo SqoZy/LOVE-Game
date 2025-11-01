@@ -1,29 +1,29 @@
 local InteractObject = require("Objects.InteractObjects.interactobject")
-local ClickObject = setmetatable({}, { __index = InteractObject })
+local clickSpirit = setmetatable({}, { __index = InteractObject })
 local mouseinput = require("Input.mouseinput")
 
-function ClickObject:new(x, y, radius)
+function clickSpirit:new(x, y, radius)
     local obj = InteractObject.new(self, x, y, radius) 
     setmetatable(obj, { __index = self }) 
     return obj
 end
 
-function ClickObject:update(dt)
+function clickSpirit:update(dt)
     InteractObject.update(self, dt)
-    mouseinput.destroyClickObject(self)
+    mouseinput.destroyclickSpirit(self)
 end
 
-function ClickObject:draw()
-    love.graphics.setColor(0, 1, 0) -- Green color for ClickObject
+function clickSpirit:draw()
+    love.graphics.setColor(0, 1, 0) -- Green color for clickSpirit
     love.graphics.circle("fill", self.x, self.y, self.radius)
 end
 
-function ClickObject:_spawn(growDuration)
+function clickSpirit:_spawn(growDuration)
     InteractObject._spawn(self, growDuration) -- Call the base class _spawn method
 end
 
-function ClickObject:_destroy()
+function clickSpirit:_destroy()
     InteractObject._destroy(self)
 end
 
-return ClickObject
+return clickSpirit

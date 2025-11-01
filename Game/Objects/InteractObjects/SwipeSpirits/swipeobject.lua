@@ -1,28 +1,28 @@
 local InteractObject = require("Objects.InteractObjects.interactobject")
 local class = require("Libraries.middleclass")
-local SwipeObject = setmetatable({}, { __index = InteractObject })
+local swipeSpirit = setmetatable({}, { __index = InteractObject })
 local mouseinput = require("Input.mouseinput")
 
-local swipeobject = class('SwipeObject')
+local swipeSpirit = class('swipeSpirit')
 
-function swipeobject:initialize(x, y, radius, objectDirection)
+function swipeSpirit:initialize(x, y, radius, objectDirection)
     local obj = InteractObject.new(self, x, y, radius) 
     setmetatable(obj, { __index = self }) 
     obj.direction = objectDirection
     return obj
 end
 
-function swipeobject:update(dt)
+function swipeSpirit:update(dt)
     InteractObject.update(self, dt)
     mouseinput.dragObject(self)
 end
 
-function swipeobject:draw()
+function swipeSpirit:draw()
     love.graphics.setColor(self:getColor())
     love.graphics.circle("fill", self.x, self.y, self.radius)
 end
 
-function swipeobject:getColor()
+function swipeSpirit:getColor()
     if self.direction == "up" then
         return {1, 1, 1}
     elseif self.direction == "down" then
@@ -35,19 +35,19 @@ function swipeobject:getColor()
 end
 
 
-function swipeobject:onSwipe(direction)
-    print("SwipeObject swiped in direction: " .. direction)
+function swipeSpirit:onSwipe(direction)
+    print("swipeSpirit swiped in direction: " .. direction)
     if direction == self.direction then
         self:_destroy()
     end
 end
 
-function swipeobject:_spawn(growDuration)
+function swipeSpirit:_spawn(growDuration)
     InteractObject._spawn(self, growDuration)
 end
 
-function swipeobject:_destroy()
+function swipeSpirit:_destroy()
     InteractObject._destroy(self)
 end
 
-return swipeobject
+return swipeSpirit

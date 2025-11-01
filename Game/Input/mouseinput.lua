@@ -68,7 +68,7 @@ function mouseinput.dragObject(object)
     end
 end
 
-function mouseinput.destroyClickObject(object)
+function mouseinput.destroyclickSpirit(object)
     if love.mouse.isDown(1) then
         if mouseinput.checkMouseHover(object) then
             object:_destroy()
