@@ -22,5 +22,9 @@ function spiritManager.draw()
     spiritSpawner.draw()
 end
 
+function spiritManager.destroyclickSpirit(object)
+    spiritSpawner.destroyclickSpirit(object)
+end
+
 return spiritManager
 

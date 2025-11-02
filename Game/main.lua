@@ -12,4 +12,4 @@ end
 
 function love.draw()
     screenmanager.draw()
-end 
+end  

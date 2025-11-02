@@ -1,5 +1,5 @@
-local clickSpirit = require("Objects.InteractObjects.ClickSpirit.clickobject")
-local swipeSpirit = require("Objects.InteractObjects.SwipeSpirits.swipeobject")
+local clickSpirit = require("Objects.InteractObjects.ClickSpirit.clickspirit")
+local swipeSpirit = require("Objects.InteractObjects.SwipeSpirits.swipespirit")
 local spiritSpawner = {}
 
 spiritSpawner.objects = {}
