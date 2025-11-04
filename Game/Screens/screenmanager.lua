@@ -19,7 +19,7 @@ function screenmanager.load()
     screenModules["endscreen"] = endScreen
     screenModules["specialtyscreen"] = specialtyscreen
 
-    initiateScreen("specialtyscreen")
+    initiateScreen("gamescreen")
 end
 
 function screenmanager.update(dt)

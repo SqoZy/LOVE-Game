@@ -47,10 +47,10 @@ end
 
 function specialmanager.draw()
     local screenWidth, screenHeight = love.graphics.getDimensions()
-    local specialX, specialY = 5, screenHeight - 85 -- Position for the special
-    local specialScale = 0.15
-    local ultX, ultY = 80, screenHeight - 60 -- Position for the ultimate
-    local ultScale = 0.1 -- Scale for the ultimate image
+    local specialX, specialY = 40, screenHeight - 140 -- Move to bottom left
+    local specialScale = 0.5 -- Make it much larger
+    local ultX, ultY = 160, screenHeight - 120 -- Move ultimate right and up
+    local ultScale = 0.4 -- Make ultimate larger
 
     -- Draw the selected special
     if selectedSpecial then

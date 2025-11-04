@@ -3,10 +3,10 @@ local screenWidth, screenHeight = love.graphics.getDimensions()
 
 
 function spiritPowerBar.load()
-    spiritPowerBar.x = screenWidth - 220
-    spiritPowerBar.y = screenHeight - 60
-    spiritPowerBar.width = 200
-    spiritPowerBar.height = 30
+    spiritPowerBar.x = screenWidth / 6
+    spiritPowerBar.y = screenHeight /6
+    spiritPowerBar.width = 20
+    spiritPowerBar.height = 100
     spiritPowerBar.maxPower = 100
     spiritPowerBar.currentPower = 0
 end

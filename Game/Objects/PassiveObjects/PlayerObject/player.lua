@@ -16,8 +16,8 @@ function player.load()
     player.width = 109
     player.height = 128
     local screenWidth, screenHeight = love.graphics.getDimensions()
-    player.x = screenWidth * 0.10
-    player.y = screenHeight * 0.60
+    player.x = 10
+    player.y = 10
 end
 
 function player.update(dt)
