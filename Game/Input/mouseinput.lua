@@ -4,39 +4,37 @@ local swipeStartX, swipeStartY = nil, nil
 local minimumSwipe = 10
 
 function mouseinput.checkMouseHover(object)
-    local x, y = love.mouse.getPosition()
+    local virtualMX, virtualMY = mouseinput.getVirtualMousePosition()
     if object.radius then
         -- Handle circular objects
-        local dx = x - object.x
-        local dy = y - object.y
+        local dx = virtualMX - object.x
+        local dy = virtualMY - object.y
         return (dx * dx + dy * dy) <= (object.radius * object.radius)
     elseif object.width and object.height then
         -- Handle rectangular objects
-        return x > object.x and x < object.x + object.width and y > object.y and y < object.y + object.height
+        return virtualMX > object.x and virtualMX < object.x + object.width and virtualMY > object.y and virtualMY < object.y + object.height
     else
         error("Object must have either 'radius' or 'width' and 'height'")
     end
 end
 
 function mouseinput.dragObject(object)
+    local virtualMX, virtualMY = mouseinput.getVirtualMousePosition()
     if love.mouse.isDown(1) then
-        local x, y = love.mouse.getPosition()
-
         if not object.dragging and mouseinput.checkMouseHover(object) then
-            object.dragging = true -- Set dragging for this specific object
-            offsetX = x - object.x
-            offsetY = y - object.y
-            swipeStartX = x
-            swipeStartY = y
+            object.dragging = true
+            offsetX = virtualMX - object.x
+            offsetY = virtualMY - object.y
+            swipeStartX = virtualMX
+            swipeStartY = virtualMY
         end
 
         if object.dragging then
-            object.x = x - offsetX
-            object.y = y - offsetY
+            object.x = virtualMX - offsetX
+            object.y = virtualMY - offsetY
 
-            -- Detect swipe direction during dragging
-            local deltaX = x - swipeStartX
-            local deltaY = y - swipeStartY
+            local deltaX = virtualMX - swipeStartX
+            local deltaY = virtualMY - swipeStartY
 
             if math.abs(deltaX) > minimumSwipe or math.abs(deltaY) > minimumSwipe then
                 local direction = nil
@@ -56,13 +54,13 @@ function mouseinput.dragObject(object)
 
                 if direction then
                     object:onSwipe(direction) 
-                    swipeStartX = x 
-                    swipeStartY = y
+                    swipeStartX = virtualMX
+                    swipeStartY = virtualMY
                 end
             end
         end
     else
-        object.dragging = false -- Reset dragging for this specific object
+        object.dragging = false
         swipeStartX = nil
         swipeStartY = nil
     end
@@ -74,6 +72,13 @@ function mouseinput.destroyclickSpirit(object)
             object:_destroy()
         end
     end
+end
+
+function mouseinput.getVirtualMousePosition()
+    local mx, my = love.mouse.getPosition()
+    local virtualMX = mx * (virtualWidth / windowWidth)
+    local virtualMY = my * (virtualHeight / windowHeight)
+    return virtualMX, virtualMY
 end
 
 return mouseinput

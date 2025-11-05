@@ -27,9 +27,8 @@ function GeneralScreenInput(key, screen)
         fullscreen = not fullscreen
         love.window.setFullscreen(fullscreen)
         if not fullscreen then
-            local screenWidth, screenHeight = love.window.getDesktopDimensions()
-            local windowWidth = screenWidth * 0.9 -- 90% of the screen width
-            local windowHeight = screenHeight * 0.9 -- 90% of the screen height
+            local windowWidth = virtualWidth * 0.9
+            local windowHeight = virtualHeight * 0.9 
             love.window.setMode(windowWidth, windowHeight, { fullscreen = false, resizable = false })
         end
     end

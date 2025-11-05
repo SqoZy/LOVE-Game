@@ -36,10 +36,9 @@ function spiritSpawner.generateRandomProperties()
 end
 
 function spiritSpawner.spawnRandomSpirit()
-    local screenWidth, screenHeight = love.graphics.getDimensions()
     local radius, growDuration = spiritSpawner.generateRandomProperties()
-    local maxY = screenHeight * 0.75
-    local x = math.random(radius, screenWidth - radius)
+    local maxY = virtualHeight * 0.75
+    local x = math.random(radius, virtualWidth - radius)
     local y = math.random(radius, maxY - radius)
     local spiritType = math.random(1, 2) == 1 and "click" or "swipe"
     spiritSpawner.spawnSpirits(spiritType, x, y, radius, growDuration)

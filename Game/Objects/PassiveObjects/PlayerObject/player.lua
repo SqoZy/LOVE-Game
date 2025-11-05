@@ -1,5 +1,4 @@
 local player = {}
-local screenWidth, screenHeight = love.graphics.getDimensions()
 local anim8 = require("Libraries.anim8")
 local enemySpawner = require("Spawners.enemyspawner")
 
@@ -15,9 +14,8 @@ function player.load()
 
     player.width = 109
     player.height = 128
-    local screenWidth, screenHeight = love.graphics.getDimensions()
-    player.x = 10
-    player.y = 10
+    player.x = 50
+    player.y = virtualHeight - player.height - 5
 end
 
 function player.update(dt)
@@ -44,7 +42,7 @@ function attack()
     end
 
     if closestEnemy then
-        closestEnemy:takeDamage(10) -- Or use your special's damage value
+        closestEnemy:takeDamage(10)
         print("Attacked enemy at:", closestEnemy.x, closestEnemy.y)
     end
 end

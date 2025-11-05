@@ -1,0 +1,15 @@
+[
+    {
+        "enemies": [
+            { "type": "goblin", "x": 600, "y": 295 },
+            { "type": "orc", "x": 650, "y": 295 }
+        ]
+    },
+    {
+        "enemies": [
+            { "type": "goblin", "x": 600, "y": 295 },
+            { "type": "goblin", "x": 650, "y": 295 },
+            { "type": "orc", "x": 700, "y": 295 }
+        ]
+    }
+]

@@ -6,15 +6,13 @@ local mouseinput = require("Input.mouseinput")
 local screen = "specialtyscreen"
 local button = {}
 
-local screenWidth, screenHeight = love.graphics.getDimensions()
-
 function specialtyscreen.load()
 
     createSpecialRows()
 
     button = {
-        x = screenWidth / 2 - 100,
-        y = screenHeight - 100,
+        x = virtualWidth / 2 - 100,
+        y = virtualHeight - 100,
         width = 200,
         height = 50,
         text = "Go to Game"
@@ -30,8 +28,8 @@ function createSpecialRows()
         table.insert(specialtyscreen.specialties, {
             name = special.name,
             image = special.image,
-            x = (i - 1) * (screenWidth / numSpecialties) + (screenWidth / numSpecialties) / 2 - 50,
-            y = screenHeight / 3,
+            x = (i - 1) * (virtualWidth / numSpecialties) + (virtualWidth / numSpecialties) / 2 - 50,
+            y = virtualHeight / 3,
             width = 100,
             height = 100
         })
@@ -42,8 +40,8 @@ function createSpecialRows()
         table.insert(specialtyscreen.ultimates, {
             name = ultimate.name,
             image = ultimate.image,
-            x = (i - 1) * (screenWidth / numUltimates) + (screenWidth / numUltimates) / 2 - 50,
-            y = 2 * screenHeight / 3,
+            x = (i - 1) * (virtualWidth / numUltimates) + (virtualWidth / numUltimates) / 2 - 50,
+            y = 2 * virtualHeight / 3,
             width = 100,
             height = 100
         })

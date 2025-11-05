@@ -1,12 +1,10 @@
 local spiritPowerBar = {}
-local screenWidth, screenHeight = love.graphics.getDimensions()
-
 
 function spiritPowerBar.load()
-    spiritPowerBar.x = screenWidth / 6
-    spiritPowerBar.y = screenHeight /6
     spiritPowerBar.width = 20
     spiritPowerBar.height = 100
+    spiritPowerBar.x = 5
+    spiritPowerBar.y = virtualHeight - spiritPowerBar.height - 10
     spiritPowerBar.maxPower = 100
     spiritPowerBar.currentPower = 0
 end
@@ -29,7 +27,7 @@ function spiritPowerBar.consumePower(amount)
 end
 
 function spiritPowerBar.draw()
-    love.graphics.setColor(0.2, 0.2, 0.2) 
+    love.graphics.setColor(0, 0, 1) 
     love.graphics.rectangle("fill", spiritPowerBar.x, spiritPowerBar.y, spiritPowerBar.width, spiritPowerBar.height)
 
     local powerRatio = spiritPowerBar.currentPower / spiritPowerBar.maxPower
