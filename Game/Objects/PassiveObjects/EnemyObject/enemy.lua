@@ -4,10 +4,13 @@ enemy.__index = enemy
 function enemy:new(x, y)
     local obj = setmetatable({}, self)
     obj.x = x or 0
-    obj.y = y or 0
+    obj.y = y - (self.height or 0)
     obj.speed = 100
     obj.health = 10
     obj.isDestroyed = false
+    
+    print(string.format("Enemy spawned at: x=%.2f, y=%.2f", obj.x, obj.y))
+
     return obj
 end
 
@@ -19,6 +22,14 @@ function enemy:update(dt)
     self.x = self.x + -self.speed * dt
 end
 
+function enemy:getHeight()
+    return self.height or error("Height not defined for enemy object")
+end
+
+function enemy:getWidth()
+    return self.width or error("Width not defined for enemy object")
+end
+
 function enemy:takeDamage(damage)
     self.health = self.health - damage
     if self.health <= 0 then
@@ -27,7 +38,6 @@ function enemy:takeDamage(damage)
 end
 
 function enemy:destroy()
-    -- give player points
     self.isDestroyed = true
 end
 

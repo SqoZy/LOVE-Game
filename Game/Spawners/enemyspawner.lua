@@ -1,38 +1,50 @@
 local GolbinEnemy = require("Objects.PassiveObjects.EnemyObject.trashenemy")
+local eyeBallEnemy = require("Objects.PassiveObjects.EnemyObject.eyeballenemy")
 local enemySpawner = {}
 local spawnTimer = 0
 local spawnInterval = 3
 local json = require("Libraries.json")
 
-enemySpawner.enemies = {} -- Table to store all spawned enemies
+enemySpawner.enemies = {}
+enemySpawner.spawnQueue = {} 
 
-function enemySpawner.loadWaves()
-    local contents = love.filesystem.read("waves.json")
+function enemySpawner.load()
+    local contents = love.filesystem.read("Spawners/waves.json")
     enemySpawner.waves = json.decode(contents)
     enemySpawner.currentWave = 1
+    enemySpawner.loadNextWave()
 end
 
-function enemySpawner.spawnWave()
-    local wave = enemySpawner.waves[enemySpawner.currentWave]
-    for _, enemyData in ipairs(wave.enemies) down
-        if enemyData.type == "goblin" then
-            enemySpawner.spawnGoblinEnemy(enemyData.x, enemyData.y)
-        elseif enemyData.type == "orc" then
-            -- noting
-        end
+function enemySpawner.loadNextWave()
+    if enemySpawner.currentWave > #enemySpawner.waves then
+        print("all waves completed")
+        return
     end
-    enemySpawner.currentWave = enemySpawner.currentwave + 1
+
+    local wave = enemySpawner.waves[enemySpawner.currentWave]
+    for _, enemyData in ipairs(wave.enemies) do
+        table.insert(enemySpawner.spawnQueue, enemyData.type)
+    end
+    enemySpawner.currentWave = enemySpawner.currentWave + 1
 end
 
-function enemySpawner.spawn(wavePattern)
-    local x = virtualWidth * 1.05
-    local y = virtualHeight - enemy.height - 5
-    if 
-    enemySpawner.spawnGolbinEnemy(x, y)
+function enemySpawner.spawnEnemy(enemyType)
+    if enemyType == "goblin" then
+        enemySpawner.spawnGolbinEnemy()
+    elseif enemyType == "eyeball" then
+        enemySpawner.spawnEyeBallEnemy()
+    end
 end
 
-function enemySpawner.spawnGolbinEnemy(x, y)
+function enemySpawner.spawnGolbinEnemy()
+    local x, y = virtualWidth + 400, virtualHeight - 40
     local newEnemy = GolbinEnemy:new(x, y)
+    table.insert(enemySpawner.enemies, newEnemy)
+end
+
+function enemySpawner.spawnEyeBallEnemy()
+    local x, y = virtualWidth + 400, virtualHeight - 40
+    local newEnemy = eyeBallEnemy:new(x, y)
     table.insert(enemySpawner.enemies, newEnemy)
 end
 
@@ -48,8 +60,14 @@ function enemySpawner.update(dt)
 
     spawnTimer = spawnTimer + dt
     if spawnTimer >= spawnInterval then
-        enemySpawner.spawn()
-        spawnTimer = 0
+        if #enemySpawner.spawnQueue > 0 then
+            local enemyType = table.remove(enemySpawner.spawnQueue, 1)
+            enemySpawner.spawnEnemy(enemyType)
+            spawnTimer = 0
+        else
+            enemySpawner.loadNextWave()
+            spawnTimer = 0
+        end
     end
 end
 

@@ -11,6 +11,7 @@ local spiritPowerBar = require("Ui.spiritpowerbar")
 function gamescreen.load()
     player.load()
     spiritManager.load()
+    enemySpawner.load()
     spiritPowerBar.load()
 end
 

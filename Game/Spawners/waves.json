@@ -1,15 +1,23 @@
 [
     {
         "enemies": [
-            { "type": "goblin", "x": 600, "y": 295 },
-            { "type": "orc", "x": 650, "y": 295 }
+            { "type": "eyeball"},
+            { "type": "eyeball"} 
         ]
     },
     {
         "enemies": [
-            { "type": "goblin", "x": 600, "y": 295 },
-            { "type": "goblin", "x": 650, "y": 295 },
-            { "type": "orc", "x": 700, "y": 295 }
+            { "type": "goblin"},
+            { "type": "goblin"},
+            { "type": "eyeball"}
+        ]
+    },
+    {
+        "enemies": [
+            { "type": "eyeball"},
+            { "type": "eyeball"},
+            { "type": "eyeball"},
+            { "type": "goblin"}
         ]
     }
 ]
