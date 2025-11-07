@@ -3,10 +3,11 @@ local eyeBallEnemy = setmetatable({}, { __index = enemy })
 eyeBallEnemy.__index = eyeBallEnemy
 anim8 = require("Libraries.anim8")
 
+eyeBallEnemy.width = 128
+eyeBallEnemy.height = 48
+
 function eyeBallEnemy:new(x, y)
     local obj = enemy.new(self, x, y)
-    obj.width = 128
-    obj.height = 48
     obj.spritesheet = love.graphics.newImage("assets/enemies/deadlands/eyeball/eyeballmonster.png")
     obj.grid = anim8.newGrid(obj.width, obj.height, obj.spritesheet:getWidth(), obj.spritesheet:getHeight())
 

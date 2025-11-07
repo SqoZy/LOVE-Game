@@ -3,10 +3,11 @@ local trashEnemy = setmetatable({}, { __index = enemy })
 trashEnemy.__index = trashEnemy
 anim8 = require("Libraries.anim8")
 
+trashEnemy.width = 64
+trashEnemy.height = 64
+
 function trashEnemy:new(x, y)
     local obj = enemy.new(self, x, y)
-    obj.width = 64
-    obj.height = 64
     obj.spritesheet = love.graphics.newImage("assets/enemies/deadlands/trash/trashmonster.png")
     obj.grid = anim8.newGrid(obj.width, obj.height, obj.spritesheet:getWidth(), obj.spritesheet:getHeight())
 

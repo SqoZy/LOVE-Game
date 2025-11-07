@@ -15,7 +15,9 @@ function enemy:new(x, y)
 end
 
 function enemy:draw()
-    love.graphics.setColor(1, 0, 0)
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.line(self.x, self.y, self.x + 100, self.y + 100)
+    -- love.graphics.setColor(1, 0, 0)
 end
 
 function enemy:update(dt)

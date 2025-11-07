@@ -1,8 +1,9 @@
 [
     {
         "enemies": [
+            { "type": "tooth"},
             { "type": "eyeball"},
-            { "type": "eyeball"} 
+            { "type": "trash"}
         ]
     },
     {

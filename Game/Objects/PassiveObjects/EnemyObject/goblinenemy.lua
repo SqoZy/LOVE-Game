@@ -3,10 +3,11 @@ local goblinEnemy = setmetatable({}, { __index = enemy })
 goblinEnemy.__index = goblinEnemy
 anim8 = require("Libraries.anim8")
 
+goblinEnemy.width = 150
+goblinEnemy.height = 150
+
 function goblinEnemy:new(x, y)
     local obj = enemy.new(self, x, y)
-    obj.width = 150
-    obj.height = 150
     obj.spritesheet = love.graphics.newImage("assets/enemies/goblin/Runleft.png")
     obj.grid = anim8.newGrid(obj.width, obj.height, obj.spritesheet:getWidth(), obj.spritesheet:getHeight())
 

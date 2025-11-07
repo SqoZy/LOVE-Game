@@ -1,5 +1,7 @@
-local GolbinEnemy = require("Objects.PassiveObjects.EnemyObject.trashenemy")
+local golbinEnemy = require("Objects.PassiveObjects.EnemyObject.goblinenemy")
 local eyeBallEnemy = require("Objects.PassiveObjects.EnemyObject.eyeballenemy")
+local toothEnemy = require("Objects.PassiveObjects.EnemyObject.toothenemy")
+local trashEnemy = require("Objects.PassiveObjects.EnemyObject.trashenemy")
 local enemySpawner = {}
 local spawnTimer = 0
 local spawnInterval = 3
@@ -7,6 +9,13 @@ local json = require("Libraries.json")
 
 enemySpawner.enemies = {}
 enemySpawner.spawnQueue = {} 
+
+local enemyClasses = {
+    goblin = golbinEnemy,
+    eyeball = eyeBallEnemy,
+    tooth = toothEnemy,
+    trash = trashEnemy
+}
 
 function enemySpawner.load()
     local contents = love.filesystem.read("Spawners/waves.json")
@@ -29,22 +38,13 @@ function enemySpawner.loadNextWave()
 end
 
 function enemySpawner.spawnEnemy(enemyType)
-    if enemyType == "goblin" then
-        enemySpawner.spawnGolbinEnemy()
-    elseif enemyType == "eyeball" then
-        enemySpawner.spawnEyeBallEnemy()
+    local enemyClass = enemyClasses[enemyType]
+    if not enemyClass then
+        print("Unknown enemy type: " .. enemyType) 
+        return
     end
-end
 
-function enemySpawner.spawnGolbinEnemy()
-    local x, y = virtualWidth + 400, virtualHeight - 40
-    local newEnemy = GolbinEnemy:new(x, y)
-    table.insert(enemySpawner.enemies, newEnemy)
-end
-
-function enemySpawner.spawnEyeBallEnemy()
-    local x, y = virtualWidth + 400, virtualHeight - 40
-    local newEnemy = eyeBallEnemy:new(x, y)
+    local newEnemy = enemyClass:new(virtualWidth , virtualHeight)
     table.insert(enemySpawner.enemies, newEnemy)
 end
 

@@ -3,10 +3,11 @@ local toothEnemy = setmetatable({}, { __index = enemy })
 toothEnemy.__index = toothEnemy
 anim8 = require("Libraries.anim8")
 
+toothEnemy.width = 64
+toothEnemy.height = 64
+
 function toothEnemy:new(x, y)
     local obj = enemy.new(self, x, y)
-    obj.width = 166
-    obj.height = 155
     obj.spritesheet = love.graphics.newImage("assets/enemies/deadlands/toothwalker/toothwalker.png")
     obj.grid = anim8.newGrid(obj.width, obj.height, obj.spritesheet:getWidth(), obj.spritesheet:getHeight())
 
@@ -27,4 +28,4 @@ function toothEnemy:draw()
     self.animation.run:draw(self.spritesheet, self.x, self.y)
 end
 
-return toothEnemy 
+return toothEnemy
