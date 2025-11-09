@@ -3,15 +3,17 @@ local dragging = false
 local swipeStartX, swipeStartY = nil, nil
 local minimumSwipe = 10
 
+function mouseinput.update(dt)
+
+end
+
 function mouseinput.checkMouseHover(object)
     local virtualMX, virtualMY = mouseinput.getVirtualMousePosition()
     if object.radius then
-        -- Handle circular objects
         local dx = virtualMX - object.x
         local dy = virtualMY - object.y
         return (dx * dx + dy * dy) <= (object.radius * object.radius)
     elseif object.width and object.height then
-        -- Handle rectangular objects
         return virtualMX > object.x and virtualMX < object.x + object.width and virtualMY > object.y and virtualMY < object.y + object.height
     else
         error("Object must have either 'radius' or 'width' and 'height'")
@@ -63,14 +65,6 @@ function mouseinput.dragObject(object)
         object.dragging = false
         swipeStartX = nil
         swipeStartY = nil
-    end
-end
-
-function mouseinput.destroyclickSpirit(object)
-    if love.mouse.isDown(1) then
-        if mouseinput.checkMouseHover(object) then
-            object:_destroy()
-        end
     end
 end
 

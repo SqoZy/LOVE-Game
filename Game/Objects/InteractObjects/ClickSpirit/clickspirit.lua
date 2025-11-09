@@ -5,12 +5,17 @@ local mouseinput = require("Input.mouseinput")
 function clickSpirit:new(x, y, radius)
     local obj = InteractObject.new(self, x, y, radius) 
     setmetatable(obj, { __index = self }) 
+    obj.spiritType = "click"
     return obj
 end
 
 function clickSpirit:update(dt)
     InteractObject.update(self, dt)
-    mouseinput.destroyclickSpirit(self)
+    if love.mouse.isDown(1) then
+        if mouseinput.checkMouseHover(self) then
+            self:_destroy()
+        end
+    end
 end
 
 function clickSpirit:draw()
@@ -20,10 +25,6 @@ end
 
 function clickSpirit:_spawn(growDuration)
     InteractObject._spawn(self, growDuration) -- Call the base class _spawn method
-end
-
-function clickSpirit:_destroy()
-    InteractObject._destroy(self)
 end
 
 return clickSpirit

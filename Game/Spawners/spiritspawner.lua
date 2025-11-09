@@ -11,7 +11,7 @@ function spiritSpawner.clickSpiritSpawn(x, y, radius, growDuration)
 end
 
 function spiritSpawner.swipeSpiritSpawn(x, y, radius, growDuration, direction)
-    local newObject = swipeSpirit:initialize(x, y, radius, direction)
+    local newObject = swipeSpirit:new(x, y, radius, direction)
     newObject:_spawn(growDuration) 
     table.insert(spiritSpawner.objects, newObject) 
 end

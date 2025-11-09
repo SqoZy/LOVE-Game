@@ -1,14 +1,13 @@
 local InteractObject = require("Objects.InteractObjects.interactobject")
-local class = require("Libraries.middleclass")
-local swipeSpirit = setmetatable({}, { __index = InteractObject })
 local mouseinput = require("Input.mouseinput")
+local swipeSpirit = setmetatable({}, { __index = InteractObject })
+swipeSpirit.__index = swipeSpirit
 
-local swipeSpirit = class('swipeSpirit')
-
-function swipeSpirit:initialize(x, y, radius, objectDirection)
+function swipeSpirit:new(x, y, radius, objectDirection)
     local obj = InteractObject.new(self, x, y, radius) 
     setmetatable(obj, { __index = self }) 
     obj.direction = objectDirection
+    obj.spiritType = "swipe"
     return obj
 end
 
@@ -34,7 +33,6 @@ function swipeSpirit:getColor()
     end
 end
 
-
 function swipeSpirit:onSwipe(direction)
     print("swipeSpirit swiped in direction: " .. direction)
     if direction == self.direction then
@@ -44,10 +42,6 @@ end
 
 function swipeSpirit:_spawn(growDuration)
     InteractObject._spawn(self, growDuration)
-end
-
-function swipeSpirit:_destroy()
-    InteractObject._destroy(self)
 end
 
 return swipeSpirit

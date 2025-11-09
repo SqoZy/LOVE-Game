@@ -27,7 +27,7 @@ function player.draw()
     player.animation.idle:draw(player.spritesheet, player.x, player.y)
 end
 
-function attack()
+function player.attack()
     local closestEnemy = nil
     local closestDist = math.huge
     local pxcenter, pycenter = player.x + player.width / 2, player.y + player.height / 2
