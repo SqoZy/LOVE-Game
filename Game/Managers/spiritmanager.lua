@@ -1,5 +1,6 @@
 local spiritSpawner = require("Spawners.spiritspawner")
 local spiritPowerBar = require("Ui.spiritpowerbar")
+local player = require("Objects.PassiveObjects.PlayerObject.player")
 local spiritManager = {}
 
 local spawnTimer = 0 
@@ -30,11 +31,20 @@ function spiritManager.onSpiritDestroyed(spirit)
     print("spirit destroyed:" .. spirit.spiritType)
     if spirit.spiritType == "click" then
         print("added power to clickspirit")
-        spiritPowerBar.addPower(10)
+        spiritPowerBar.addPower(100)
     elseif spirit.spiritType == "swipe" then
-        spiritPowerBar.addPower(15)
+        spiritPowerBar.addPower(150)
+    end
+    if spiritPowerBar.getCurrentPower() >= 100 then
+        player.attack()
+        spiritPowerBar.consumePower(100)
     end
 end
+
+function spiritManager.playerAttack()
+    player.attack()
+end
+
 
 function spiritManager.draw()
     spiritSpawner.draw()
