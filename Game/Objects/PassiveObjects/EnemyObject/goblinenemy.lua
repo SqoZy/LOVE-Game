@@ -26,6 +26,7 @@ end
 function goblinEnemy:draw()
     love.graphics.setColor(1, 1, 1)
     self.animation.run:draw(self.spritesheet, self.x, self.y)
+    enemy.draw(self)
 end
 
 return goblinEnemy 

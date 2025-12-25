@@ -14,7 +14,7 @@ function toothEnemy:new(x, y)
     obj.animation = {}
     obj.animation.run = anim8.newAnimation(obj.grid('1-6', 1), 0.15)
 
-    obj.speed = 15
+    obj.speed = 50
     return obj
 end
 
@@ -26,6 +26,7 @@ end
 function toothEnemy:draw()
     love.graphics.setColor(1, 1, 1)
     self.animation.run:draw(self.spritesheet, self.x, self.y)
+    enemy.draw(self)
 end
 
 return toothEnemy

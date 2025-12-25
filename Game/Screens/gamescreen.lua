@@ -8,6 +8,7 @@ local player = require("Objects.PassiveObjects.PlayerObject.player")
 local screenmanager = require("Screens.screenmanager")
 local spiritPowerBar = require("Ui.spiritpowerbar")
 local ultPowerBar = require("Ui.ultpowerbar")
+local playerbullet = require("Objects.PassiveObjects.PlayerObject.playerbullet")
 
 function gamescreen.load()
     player.load()
@@ -15,12 +16,14 @@ function gamescreen.load()
     enemySpawner.load()
     spiritPowerBar.load()
     ultPowerBar.load()
+    playerbullet.load()
 end
 
 function gamescreen.update(dt)
     spiritManager.update(dt)
     enemySpawner.update(dt)
     player.update(dt)
+    playerbullet.update(dt)
 end
 
 function gamescreen.draw()
@@ -30,6 +33,7 @@ function gamescreen.draw()
     screenmanager.drawSpecial()
     spiritPowerBar.draw()
     ultPowerBar.draw()
+    playerbullet.draw()
 end
 
 function love.keypressed(key, scancode, isrepeat)

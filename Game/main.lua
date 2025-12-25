@@ -6,6 +6,7 @@ windowWidth, windowHeight = love.window.getDesktopDimensions()
 windowWidth, windowHeight = windowWidth * 0.8, windowHeight * 0.8
 
 virtualWidth, virtualHeight = 640, 360
+DEBUG_HITBOXES = true
 
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")

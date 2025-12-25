@@ -6,7 +6,7 @@ function spiritPowerBar.load()
     spiritPowerBar.x = 5
     spiritPowerBar.y = virtualHeight - spiritPowerBar.height - 10
     spiritPowerBar.maxPower = 100
-    spiritPowerBar.currentPower = 0
+    spiritPowerBar.currentPower = 90
     spiritPowerBar.spiritContributions = {}
     spiritPowerBar.dominantSpirit = nil
 end

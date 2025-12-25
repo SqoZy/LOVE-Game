@@ -17,7 +17,11 @@ end
 function enemy:draw()
     love.graphics.setColor(1, 1, 1)
     love.graphics.line(self.x, self.y, self.x + 100, self.y + 100)
-    -- love.graphics.setColor(1, 0, 0)
+
+    if DEBUG_HITBOXES then
+        love.graphics.setColor(1, 0, 0, 0.5)
+        love.graphics.rectangle("fill", self.x, self.y, self:getWidth(), self:getHeight())
+    end
 end
 
 function enemy:update(dt)

@@ -1,5 +1,6 @@
 local spiritSpawner = require("Spawners.spiritspawner")
 local spiritPowerBar = require("Ui.spiritpowerbar")
+local ultPowerBar = require("Ui.ultpowerbar")
 local player = require("Objects.PassiveObjects.PlayerObject.player")
 local spiritManager = {}
 
@@ -35,6 +36,12 @@ function spiritManager.onSpiritDestroyed(spirit)
     elseif spirit.spiritType == "swipe" then
         spiritPowerBar.addPower(20, spirit.spiritType)
     end
+    ultPowerBar.addPower(10)
+    if ultPowerBar.getCurrentPower() >= 100 then
+        player.useUltimate()
+        ultPowerBar.consumePower(100)
+    end
+
     if spiritPowerBar.getCurrentPower() >= 100 then
         player.attack()
         spiritPowerBar.consumePower(100)
